@@ -17,6 +17,8 @@ public class PlayerCollection : MonoBehaviour
         }
     }
 
-
-
+    private void AddScore(int points)
+    {
+        score += points;
+    }
 }
