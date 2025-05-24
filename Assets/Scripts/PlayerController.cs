@@ -31,13 +31,13 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        playerRb.linearVelocityX = moveDirection * moveSpeed;
+        playerRb.linearVelocity = new Vector2(moveDirection * moveSpeed, playerRb.linearVelocity.y);
         GroundCheck();
 
         animator.SetBool("Is Grounded", isGrounded);
         animator.SetBool("Is Double Jump", canDoubleJump == false);
         animator.SetFloat("Velocity y", playerRb.linearVelocity.y);
-        animator.SetBool("is moving", moveDirection != 0);
+        animator.SetBool("Is Moving", moveDirection != 0);
     }
 
 
