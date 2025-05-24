@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     public LayerMask whatIsGround;
 
     private float moveDirection;
+    private bool canDoubleJump;
     public bool isGrounded;
 
 
@@ -31,8 +32,12 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         playerRb.linearVelocityX = moveDirection * moveSpeed;
-
         GroundCheck();
+
+        animator.SetBool("Is Grounded", isGrounded);
+        animator.SetBool("Is Double Jump", canDoubleJump == false);
+        animator.SetFloat("Velocity y", playerRb.linearVelocity.y);
+
     }
 
 
@@ -50,21 +55,41 @@ public class PlayerController : MonoBehaviour
 
 
         //set the animator boolean to true or false
-        animator.SetBool("Is Moving", moveDirection != 0);
+        animator.SetBool("Is moving", moveDirection != 0);
     }
 
     private void OnJump(InputValue value)
-    {
-        //to ensure the character always jumps in a specific speed
-        playerRb.linearVelocityY = jumpForce;
-    
+    { 
+        if (canDoubleJump == true)
+        {
+
+            //to ensure the character always jumps in a specific speed
+            playerRb.linearVelocityY = jumpForce;
+        }
+
+        if (isGrounded == false && canDoubleJump)
+        {
+            canDoubleJump = false;
+        }
+
+
+
+
+
     }
+
     private void GroundCheck()
     {
 
        RaycastHit2D hit = Physics2D.BoxCast(transform.position, Vector2.one * 0.1f,0, Vector2.down, 0.2f, whatIsGround.value);
 
         isGrounded = hit.collider != null;
+
+        if (isGrounded)
+        {
+
+            canDoubleJump = true;
+        }
 
     }
 
