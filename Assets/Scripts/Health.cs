@@ -15,7 +15,7 @@ public class Health : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Trap"))
+        if (other.CompareTag("Trap"))
         {
             Damage(1);
 
@@ -33,13 +33,13 @@ public class Health : MonoBehaviour
         points = points - value;
         healthText.text = $"<b>Health:</b> {points}";
 
-            transform.position = respawnPosition;
+        transform.position = respawnPosition;
 
 
         if (points > 1)
 
             gameOverScreen.StartFade();
-            Destroy(gameObject);
+        Destroy(gameObject);
 
     }
 
