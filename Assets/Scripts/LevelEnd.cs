@@ -8,8 +8,10 @@ public class LevelEnd : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            endScreen.SetActive(true); // Show the end screen
-            // No freezing
+            Debug.Log("End screen triggered!");  
+            Time.timeScale = 0f;
+            endScreen.SetActive(true);
+            Debug.Log("End screen set active: " + endScreen.activeSelf);
         }
     }
 }

@@ -1,16 +1,11 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class EndScreenButtons : MonoBehaviour
 {
-    public void RestartLevel()
+    public void ExitGame()
     {
-        Time.timeScale = 1f; // Resume game time
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
-
-    public void QuitGame()
-    {
-        Application.Quit();
+        Debug.Log("Exit Game");  
+        Application.Quit();      
     }
 }
+
